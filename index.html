@@ -1,210 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You ❤️</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ff7ea8" />
+  <meta name="description" content="A private little surprise made with memories and love." />
+  <title>For You, Meri Jaan ❤️</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="heartsCanvas"></canvas>
+  <canvas id="sparkleCanvas" aria-hidden="true"></canvas>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
 
-  <div class="music-control">
-    <button id="musicBtn" aria-label="Play music">♫ Play Music</button>
-    <audio id="bgMusic" loop>
-      <source src="music.mp3" type="audio/mpeg" />
-    </audio>
-  </div>
+  <audio id="bgMusic" loop preload="metadata">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
 
-  <main>
-    <section class="hero">
-      <div class="glass hero-card">
-        <p class="eyebrow">A little surprise for</p>
-        <h1 id="heroName">Meri Jaan ❤️</h1>
-        <p class="typing" id="typingText"></p>
-        <button class="primary-btn" id="openBtn">Open Your Surprise ❤️</button>
+  <button class="music-pill" id="musicBtn" type="button" aria-label="Play background music">
+    <span class="music-disc" aria-hidden="true">♫</span>
+    <span id="musicText">Play our song</span>
+    <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+
+  <header class="hero" id="top">
+    <div class="hero-copy">
+      <p class="mini-badge"><span>✦</span> Made only for you <span>✦</span></p>
+      <p class="script-kicker">For You</p>
+      <h1 id="heroName">Meri Jaan ❤️</h1>
+      <p class="hero-typing" id="typingText" aria-live="polite"></p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="openBtn" type="button">
+          <span>Open your surprise</span><b>♡</b>
+        </button>
+        <button class="btn btn-soft" id="peekBtn" type="button">A tiny peek ✨</button>
+      </div>
+      <p class="hero-hint">Best viewed with sound on and a little smile.</p>
+    </div>
+
+    <div class="hero-visual" aria-label="A collage of your memories">
+      <div class="halo halo-one"></div>
+      <div class="halo halo-two"></div>
+      <figure class="hero-photo hero-photo-main">
+        <img src="photos/photo2.png" alt="A smiling portrait" />
+        <figcaption>Your smile, my favourite view.</figcaption>
+      </figure>
+      <figure class="hero-photo hero-photo-left">
+        <img src="photos/photo3.png" alt="A sweet memory together" />
+      </figure>
+      <figure class="hero-photo hero-photo-right">
+        <img src="photos/photo6.png" alt="Another sweet memory together" />
+      </figure>
+      <span class="float-sticker sticker-one">💗</span>
+      <span class="float-sticker sticker-two">🦋</span>
+      <span class="float-sticker sticker-three">✨</span>
+    </div>
+
+    <button class="scroll-cue" id="scrollCue" type="button" aria-label="Scroll to the surprise">
+      <span>scroll</span><i></i>
+    </button>
+  </header>
+
+  <main class="experience" id="experience" aria-hidden="true">
+    <section class="section countdown-section reveal">
+      <div class="section-heading">
+        <p>Our special day</p>
+        <h2>Countdown to Girlfriend Day</h2>
+        <span>Every second is one step closer to making you smile.</span>
+      </div>
+      <div class="countdown-card glass-card">
+        <div class="countdown-grid">
+          <div class="count-unit"><strong id="days">00</strong><span>Days</span></div>
+          <div class="count-unit"><strong id="hours">00</strong><span>Hours</span></div>
+          <div class="count-unit"><strong id="minutes">00</strong><span>Minutes</span></div>
+          <div class="count-unit"><strong id="seconds">00</strong><span>Seconds</span></div>
+        </div>
+        <div class="countdown-heart" aria-hidden="true"><span>♡</span></div>
+        <p id="countdownNote">A little wait for a very special day.</p>
       </div>
     </section>
 
-    <section class="hidden-section" id="surpriseSection">
-      <section class="countdown-section glass reveal">
-        <div class="section-title small-space">
-          <span>Countdown</span>
-          <h2>Until Girlfriend Day 💕</h2>
-        </div>
-        <div class="countdown-grid">
-          <div class="count-box"><strong id="days">00</strong><span>Days</span></div>
-          <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
-          <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
-          <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
-        </div>
-        <p class="countdown-note" id="countdownNote">A little wait for a very special day.</p>
-      </section>
-
-      <div class="section-title">
-        <span>Just For You</span>
-        <h2>Your smile deserves a whole gallery of its own</h2>
+    <section class="section featured-section reveal" id="featuredMemories">
+      <div class="section-heading">
+        <p>Featured memories</p>
+        <h2>Some moments deserve their own spotlight</h2>
+        <span>Swipe, tap the arrows, or let the memories move by themselves.</span>
       </div>
 
-      <section class="featured-frame glass reveal">
-        <div class="section-title small-space">
-          <span>Featured Frames</span>
-          <h2>Some photos deserve the spotlight</h2>
-        </div>
-
-        <div class="slideshow-shell">
-          <button class="slide-nav prev" id="prevSlide" aria-label="Previous photo">‹</button>
-          <div class="main-frame">
-            <div class="frame-inner">
-              <img id="featuredPhoto" src="photos/gallery1.png" alt="Featured memory" />
-            </div>
-            <div class="frame-caption">
-              <h3 id="featuredTitle">That soft smile.</h3>
-              <p id="featuredCaption">Some smiles don’t just look pretty — they stay in the heart.</p>
-            </div>
+      <div class="feature-shell glass-card">
+        <button class="round-arrow" id="prevSlide" type="button" aria-label="Previous memory">‹</button>
+        <article class="feature-card" id="featureCard">
+          <div class="feature-photo-wrap">
+            <img id="featuredPhoto" src="photos/photo1.png" alt="Featured memory" />
+            <div class="photo-shine" aria-hidden="true"></div>
+            <button class="heart-react" id="heartReact" type="button" aria-label="Send hearts">♡</button>
+            <div class="photo-counter"><span id="slideNumber">01</span> / 10</div>
           </div>
-          <button class="slide-nav next" id="nextSlide" aria-label="Next photo">›</button>
-        </div>
-        <div class="slide-dots" id="slideDots"></div>
-      </section>
-
-      <section class="gallery-section reveal">
-        <div class="section-title small-space">
-          <span>Photo Gallery</span>
-          <h2>And yes, every photo gets its own line</h2>
-        </div>
-
-        <div class="gallery-grid">
-          <figure class="gallery-card memory-card">
-            <img src="photos/gallery1.png" alt="Gallery photo 1" />
-            <figcaption>That gentle smile feels like peace in picture form.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-right">
-            <img src="photos/gallery2.png" alt="Gallery photo 2" />
-            <figcaption>The more I look at this smile, the harder it is not to admire you.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-left">
-            <img src="photos/gallery3.png" alt="Gallery photo 3" />
-            <figcaption>Even your playful expressions somehow become my favourite kind of cute.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card">
-            <img src="photos/gallery4.png" alt="Gallery photo 4" />
-            <figcaption>You don’t just brighten the frame — you brighten the mood too.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-right">
-            <img src="photos/gallery5.png" alt="Gallery photo 5" />
-            <figcaption>There’s something magical about the way you look so effortlessly beautiful.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-left">
-            <img src="photos/gallery6.png" alt="Gallery photo 6" />
-            <figcaption>No matter the outfit or moment, your smile always steals the show.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card">
-            <img src="photos/gallery7.png" alt="Gallery photo 7" />
-            <figcaption>Elegance suits you so naturally, like it was always meant to.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-right">
-            <img src="photos/gallery8.png" alt="Gallery photo 8" />
-            <figcaption>Even with a little filter magic, the real charm is still all you.</figcaption>
-          </figure>
-          <figure class="gallery-card memory-card tilt-left">
-            <img src="photos/gallery9.png" alt="Gallery photo 9" />
-            <figcaption>Maybe the sweetest picture is the one where our hands quietly say everything.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="memory-wheel-section glass reveal">
-        <div class="section-title small-space">
-          <span>Memory Wheel</span>
-          <h2>Tap a frame and relive the feeling</h2>
-        </div>
-
-        <div class="memory-wheel-wrap">
-          <div class="wheel-center">
-            <h3 id="wheelTitle">A soft beginning</h3>
-            <p id="wheelCaption">Every beautiful memory starts with one little moment.</p>
+          <div class="feature-caption">
+            <div>
+              <p class="caption-tag">A little piece of us</p>
+              <h3 id="featuredTitle">You + me = my favourite place.</h3>
+              <p id="featuredCaption">The kind of memory that turns an ordinary day into something worth keeping.</p>
+            </div>
+            <div class="slide-dots" id="slideDots" aria-label="Choose a memory"></div>
           </div>
+        </article>
+        <button class="round-arrow" id="nextSlide" type="button" aria-label="Next memory">›</button>
+      </div>
+    </section>
 
-          <button class="wheel-photo wp1" data-title="That smile." data-caption="One smile, and suddenly the whole moment feels lighter.">
-            <img src="photos/gallery1.png" alt="Wheel photo 1" />
-          </button>
-          <button class="wheel-photo wp2" data-title="Closer look." data-caption="The closer I look, the more beautiful this smile feels.">
-            <img src="photos/gallery2.png" alt="Wheel photo 2" />
-          </button>
-          <button class="wheel-photo wp3" data-title="Cute little chaos." data-caption="Even your playful side is something I would never get tired of.">
-            <img src="photos/gallery3.png" alt="Wheel photo 3" />
-          </button>
-          <button class="wheel-photo wp4" data-title="Sunshine face." data-caption="Some people really do make a frame feel warm just by being in it.">
-            <img src="photos/gallery4.png" alt="Wheel photo 4" />
-          </button>
-          <button class="wheel-photo wp5" data-title="Pure elegance." data-caption="You have that rare kind of beauty that feels both simple and special.">
-            <img src="photos/gallery7.png" alt="Wheel photo 5" />
-          </button>
-          <button class="wheel-photo wp6" data-title="Our little moment." data-caption="And then there are photos that feel more like a memory than just a picture.">
-            <img src="photos/gallery9.png" alt="Wheel photo 6" />
-          </button>
+    <section class="section orbit-section reveal">
+      <div class="section-heading">
+        <p>Memory constellation</p>
+        <h2>Tap a memory and watch the centre change</h2>
+        <span>Every little frame has its own feeling.</span>
+      </div>
+
+      <div class="orbit-card glass-card">
+        <div class="orbit-ring orbit-ring-one" aria-hidden="true"></div>
+        <div class="orbit-ring orbit-ring-two" aria-hidden="true"></div>
+        <div class="orbit-center">
+          <span class="orbit-heart">♡</span>
+          <h3 id="orbitTitle">Our little world</h3>
+          <p id="orbitCaption">A thousand tiny moments, all somehow feeling like home.</p>
         </div>
-      </section>
 
-      <section class="love-game-section glass reveal">
-        <div class="section-title">
-          <span>Cute Question</span>
+        <button class="orbit-photo orbit-photo-1" type="button" data-title="That smile" data-caption="The one thing that can make a normal day feel instantly lighter."><img src="photos/photo1.png" alt="Memory one" /></button>
+        <button class="orbit-photo orbit-photo-2" type="button" data-title="Right beside you" data-caption="Some comfort does not need words, just the right person close by."><img src="photos/photo3.png" alt="Memory two" /></button>
+        <button class="orbit-photo orbit-photo-3" type="button" data-title="Our silly side" data-caption="The unplanned laughs are always the memories that stay the longest."><img src="photos/photo4.png" alt="Memory three" /></button>
+        <button class="orbit-photo orbit-photo-4" type="button" data-title="Soft little moments" data-caption="Nothing fancy, just us being ourselves. That is what makes it special."><img src="photos/photo5.png" alt="Memory four" /></button>
+        <button class="orbit-photo orbit-photo-5" type="button" data-title="You, glowing" data-caption="Every version of you has its own kind of beauty."><img src="photos/photo8.jpg" alt="Memory five" /></button>
+        <button class="orbit-photo orbit-photo-6" type="button" data-title="A picture worth keeping" data-caption="Some photographs are not just images; they are feelings frozen in time."><img src="photos/photo10.png" alt="Memory six" /></button>
+      </div>
+    </section>
+
+    <section class="section reasons-section reveal">
+      <div class="section-heading">
+        <p>Why you matter</p>
+        <h2>Five tiny reasons, among a million</h2>
+        <span>Tap each card for a hidden note.</span>
+      </div>
+
+      <div class="reason-grid">
+        <button class="reason-card" type="button" data-note="Your smile has a way of making everything around you feel softer.">
+          <span class="reason-icon">💗</span><strong>Your smile</strong><small>Lights up my world</small><i>Tap me</i>
+        </button>
+        <button class="reason-card" type="button" data-note="Your kindness is the kind that stays with people even after the moment is over.">
+          <span class="reason-icon">🦋</span><strong>Your kindness</strong><small>Makes every day better</small><i>Tap me</i>
+        </button>
+        <button class="reason-card" type="button" data-note="With you, even random conversations somehow become my favourite ones.">
+          <span class="reason-icon">💬</span><strong>Your talks</strong><small>Never feel ordinary</small><i>Tap me</i>
+        </button>
+        <button class="reason-card" type="button" data-note="Your presence feels calm, familiar, and safe in the best possible way.">
+          <span class="reason-icon">🌷</span><strong>Your presence</strong><small>Feels like home</small><i>Tap me</i>
+        </button>
+        <button class="reason-card" type="button" data-note="You make simple memories feel more valuable than the most perfect plans.">
+          <span class="reason-icon">✨</span><strong>You are you</strong><small>And that is enough</small><i>Tap me</i>
+        </button>
+      </div>
+    </section>
+
+    <section class="section gallery-section reveal">
+      <div class="section-heading">
+        <p>Our gallery</p>
+        <h2>Ten memories, one favourite person</h2>
+        <span>Tap any photo to open it full-screen.</span>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item gallery-tall" data-index="0"><img src="photos/photo1.png" alt="Memory photo one" /><figcaption>Where happiness looked this simple.</figcaption></figure>
+        <figure class="gallery-item" data-index="1"><img src="photos/photo2.png" alt="Memory photo two" /><figcaption>Your softest smile.</figcaption></figure>
+        <figure class="gallery-item" data-index="2"><img src="photos/photo3.png" alt="Memory photo three" /><figcaption>My comfort person.</figcaption></figure>
+        <figure class="gallery-item gallery-wide" data-index="3"><img src="photos/photo4.png" alt="Memory photo four" /><figcaption>Our random little moments.</figcaption></figure>
+        <figure class="gallery-item" data-index="4"><img src="photos/photo5.png" alt="Memory photo five" /><figcaption>A smile I would keep forever.</figcaption></figure>
+        <figure class="gallery-item gallery-tall" data-index="5"><img src="photos/photo6.png" alt="Memory photo six" /><figcaption>Just us, being us.</figcaption></figure>
+        <figure class="gallery-item" data-index="6"><img src="photos/photo7.png" alt="Memory photo seven" /><figcaption>A warm little memory.</figcaption></figure>
+        <figure class="gallery-item" data-index="7"><img src="photos/photo8.jpg" alt="Memory photo eight" /><figcaption>Grace in every frame.</figcaption></figure>
+        <figure class="gallery-item gallery-wide" data-index="8"><img src="photos/photo9.png" alt="Memory photo nine" /><figcaption>You make every frame brighter.</figcaption></figure>
+        <figure class="gallery-item" data-index="9"><img src="photos/photo10.png" alt="Memory photo ten" /><figcaption>Still stealing my heart.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section shuffle-section reveal">
+      <div class="shuffle-card glass-card">
+        <div class="shuffle-copy">
+          <p>Pick a random memory</p>
+          <h2>Let fate choose our next smile</h2>
+          <span>Tap the button and a random photo with a cute line will appear.</span>
+          <button class="btn btn-primary" id="shuffleBtn" type="button">Shuffle a memory ✨</button>
+        </div>
+        <figure class="shuffle-photo" id="shufflePhoto">
+          <img id="shuffleImage" src="photos/photo7.png" alt="Random memory" />
+          <figcaption id="shuffleCaption">You make even quiet moments feel special.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section story-section reveal">
+      <div class="section-heading">
+        <p>Our story</p>
+        <h2>From one hello to all these memories</h2>
+        <span>A small timeline for a feeling that keeps growing.</span>
+      </div>
+
+      <div class="story-line glass-card">
+        <article class="story-step"><span>01</span><div><h3>The first hello</h3><p>I did not know one ordinary conversation could quietly become something so important.</p></div></article>
+        <article class="story-step"><span>02</span><div><h3>The comfort</h3><p>Somewhere between the random talks and silly smiles, you started feeling like my safest place.</p></div></article>
+        <article class="story-step"><span>03</span><div><h3>The memories</h3><p>Not one perfect moment, but all the little ones together became my favourite part.</p></div></article>
+        <article class="story-step"><span>04</span><div><h3>Today</h3><p>This page is just a small way of saying that you genuinely mean a lot to me.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section love-game-section reveal">
+      <div class="love-game glass-card" id="lovePlayground">
+        <div class="love-game-copy">
+          <p>A very serious question</p>
           <h2>Do you love me? 💘</h2>
+          <span>Choose carefully. One answer is slightly shy.</span>
         </div>
-
-        <div class="love-playground" id="lovePlayground">
-          <p class="love-question">There is only one safe answer here 😌</p>
-          <div class="love-buttons">
-            <button class="primary-btn" id="yesLoveBtn">Yes, of course 💖</button>
-            <button class="ghost-btn" id="noLoveBtn">No 😶</button>
-          </div>
-          <p class="love-answer" id="loveAnswer"></p>
+        <div class="love-buttons" id="loveButtons">
+          <button class="btn btn-primary" id="yesLoveBtn" type="button">Yes, obviously 💖</button>
+          <button class="btn btn-soft no-button" id="noLoveBtn" type="button">No 😶</button>
         </div>
-      </section>
+        <p class="love-answer" id="loveAnswer" aria-live="polite"></p>
+      </div>
+    </section>
 
-      <section class="letter glass reveal">
-        <div class="section-title small-space">
-          <span>A Letter For You</span>
-          <h2>Open the envelope</h2>
-        </div>
+    <section class="section letter-section reveal">
+      <div class="section-heading">
+        <p>A letter for you</p>
+        <h2>Tap the envelope and open my heart</h2>
+        <span>Some feelings are better written slowly.</span>
+      </div>
 
-        <div class="envelope" id="envelope">
-          <div class="envelope-lid"></div>
-          <div class="envelope-body">
-            <span>Tap to open</span>
-          </div>
-        </div>
+      <div class="letter-stage glass-card">
+        <button class="envelope" id="envelope" type="button" aria-label="Open the love letter">
+          <span class="envelope-back"></span>
+          <span class="letter-preview">For my favourite person ♡</span>
+          <span class="envelope-front"></span>
+          <span class="envelope-flap"></span>
+          <span class="wax-seal">♡</span>
+        </button>
 
-        <div class="letter-paper" id="letterPaper">
+        <article class="letter-paper" id="letterPaper" aria-hidden="true">
+          <p class="letter-date">A little note, just for you</p>
           <h2>Happy Girlfriend Day ❤️</h2>
           <div class="letter-content" id="letterContent"></div>
-        </div>
-      </section>
+        </article>
+      </div>
+    </section>
 
-      <section class="final-message reveal" id="finalMessage">
-        <p>You are the kind of person who turns small moments into memories I never want to forget. ❤️</p>
-        <button class="primary-btn" id="confettiBtn">Open Final Surprise ✨</button>
-        <p class="final-hidden" id="finalHidden">If this made you smile even a little, then my heart is already happy. 💕</p>
-      </section>
+    <section class="section promise-section reveal">
+      <div class="promise-card glass-card">
+        <p>A small promise</p>
+        <h2>Tap the glowing heart</h2>
+        <button class="promise-heart" id="promiseHeart" type="button" aria-label="Show the promise"><span>♡</span></button>
+        <div class="promise-copy" id="promiseCopy">
+          <p>I promise to value every memory we make, respect your smile, celebrate your happiness, and always wish the very best for you.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-section reveal">
+      <div class="final-card glass-card" id="finalCard">
+        <span class="final-ribbon">For my everything</span>
+        <p class="final-kicker">One last thing</p>
+        <h2>I Love You ❤️</h2>
+        <p>More than the photos, colours, animations, or words on this page, it is the feeling behind all of it that matters most.</p>
+        <button class="btn btn-primary final-btn" id="finalBtn" type="button">Open final surprise ✨</button>
+        <p class="final-secret" id="finalSecret">Just you. Just me. And many more memories to come. 💕</p>
+      </div>
     </section>
   </main>
 
-  <div id="lightbox" class="lightbox">
-    <button id="closeLightbox" aria-label="Close">×</button>
-    <img id="lightboxImage" src="" alt="Selected memory" />
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <button id="closeToast" type="button" aria-label="Close note">×</button>
+    <span id="toastIcon">💗</span>
+    <p id="toastText"></p>
   </div>
 
-  <div class="final-popup" id="finalPopup">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox-close" id="closeLightbox" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">‹</button>
+    <figure>
+      <img id="lightboxImage" src="" alt="Selected memory" />
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-arrow lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
+  <div class="final-popup" id="finalPopup" role="dialog" aria-modal="true" aria-label="Final surprise">
     <div class="final-popup-card">
-      <button class="close-final-popup" id="closeFinalPopup" aria-label="Close final popup">×</button>
+      <button id="closeFinalPopup" type="button" aria-label="Close final surprise">×</button>
+      <div class="popup-heart">♡</div>
+      <p>For you, always</p>
       <h2>I Love You ❤️</h2>
-      <p>
-        More than the photos, the colours, or the words here,
-        it’s the feeling behind them that matters most.
-        You are truly special to me.
-      </p>
-      <p class="final-popup-small">Happy Girlfriend Day, Meri Jaan 💕</p>
+      <span>You are my favourite memory, my favourite comfort, and one of the sweetest parts of my life.</span>
+      <small>Happy Girlfriend Day, Meri Jaan 💕</small>
     </div>
   </div>
 
